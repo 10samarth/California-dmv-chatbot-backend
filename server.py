@@ -84,7 +84,7 @@ def query_message(
 ) -> str:
     """Return a message for GPT, with relevant source texts pulled from a dataframe."""
     strings, relatednesses = strings_ranked_by_relatedness(query, df)
-    introduction = 'Use the below articles on the 2022 Winter Olympics to answer the subsequent question. If the answer cannot be found in the articles, write "I could not find an answer."'
+    introduction = 'Use the below article on the California Driver’s Handbook & Aid to answer the subsequent question. If the answer cannot be found, write I dont know.'
     question = f"\n\nQuestion: {query}"
     message = introduction
     for string in strings:
@@ -111,7 +111,7 @@ def ask(
     if print_message:
         print(message)
     messages = [
-        {"role": "system", "content": "You answer questions about the 2022 Winter Olympics."},
+        {"role": "system", "content": "You answer questions using california dmv handbook and list all rules to drive safely."},
         {"role": "user", "content": message},
     ]
     response = openai.ChatCompletion.create(
